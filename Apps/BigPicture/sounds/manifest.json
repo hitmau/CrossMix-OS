@@ -1,0 +1,80 @@
+[
+  {
+    "event": "scroll",
+    "file": "scroll.wav",
+    "original": "deck_ui_misc_10.wav",
+    "sha256_original": "9e8f4fd25ea966ca4feed48d1861030ccf43753425700bb01253415f714016a6"
+  },
+  {
+    "event": "navigation",
+    "file": "navigation.wav",
+    "original": "deck_ui_navigation.wav",
+    "sha256_original": "324866057f5cd4d15f4d49524de928001b09d03b513a87e21a2c367a3654aaa8"
+  },
+  {
+    "event": "confirm",
+    "file": "confirm.wav",
+    "original": "deck_ui_default_activation.wav",
+    "sha256_original": "54f08b2085d9fc47cabf052d03254cc2ed04b0c51a948bd4a43f893f76adb5c5"
+  },
+  {
+    "event": "back",
+    "file": "back.wav",
+    "original": "deck_ui_out_of_game_detail.wav",
+    "sha256_original": "33408926ae10a3f9309f57d1bae72310dbc6082a1e4e16dd5d2fb722d684e548"
+  },
+  {
+    "event": "detail",
+    "file": "detail.wav",
+    "original": "deck_ui_into_game_detail.wav",
+    "sha256_original": "04ed99770bb72898030efa4c204c053e0d8045c21bf2c7ae020428fdbdd38726"
+  },
+  {
+    "event": "tab",
+    "file": "tab.wav",
+    "original": "deck_ui_tab_transition_01.wav",
+    "sha256_original": "53e4d1661eb7dc2a20c1b4b2918a2cdb7f81f16635abbf421611c794c2128395"
+  },
+  {
+    "event": "menu_open",
+    "file": "menu_open.wav",
+    "original": "deck_ui_side_menu_fly_in.wav",
+    "sha256_original": "ab44148f6dde74c20f477dbdde517300c69776aa23c492ceaa87f5826c9a089e"
+  },
+  {
+    "event": "menu_close",
+    "file": "menu_close.wav",
+    "original": "deck_ui_side_menu_fly_out.wav",
+    "sha256_original": "98b8b68fa69714e9dccdb82c48863b1247ea27db5aba64c7550e13271f32c990"
+  },
+  {
+    "event": "launch",
+    "file": "launch.wav",
+    "original": "deck_ui_launch_game.wav",
+    "sha256_original": "d08cb414190c1c8b62be309b85a62e6ca8a7073e29e1fb8fe795f8d8ba1b7071"
+  },
+  {
+    "event": "toggle_on",
+    "file": "toggle_on.wav",
+    "original": "deck_ui_switch_toggle_on.wav",
+    "sha256_original": "ed729d91a630cf41829f27aaaa430d0090e5e55b2b489dc86b0bb38bef101cfd"
+  },
+  {
+    "event": "toggle_off",
+    "file": "toggle_off.wav",
+    "original": "deck_ui_switch_toggle_off.wav",
+    "sha256_original": "50e323ca6946a089ccf64e1de53eb07e43c826fc85540e52a5fea28ce4c2c9ee"
+  },
+  {
+    "event": "volume",
+    "file": "volume.wav",
+    "original": "deck_ui_volume.wav",
+    "sha256_original": "22204dc24a59ae46ed0e67eb6cb69f10bc9fb3c55e924899a8eb083354db4e74"
+  },
+  {
+    "event": "error",
+    "file": "error.wav",
+    "original": "confirmation_negative.wav",
+    "sha256_original": "fab1b539ed1514fc5a01acf7e25d33343585f0020f55e8fb3b4435816c07a741"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "enabled_videos": [],
+  "fn_enabled": true,
+  "idle_seconds": 120,
+  "intro_on_start": true,
+  "intro_on_wake": true,
+  "intro_volume": 60,
+  "master_volume": 65,
+  "random_intro": false,
+  "selected_video": "steam-big-picture-classico.mp4",
+  "sleep_mode": "screen",
+  "ui_sounds": true,
+  "ui_volume": 65,
+  "video_mode": "single",
+  "wake_mode": "any"
+}

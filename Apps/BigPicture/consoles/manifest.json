@@ -1,0 +1,442 @@
+[
+  {
+    "id": "ADVMAME",
+    "source": "Icons/Windows95/Emus/ADVMAME.png"
+  },
+  {
+    "id": "AMIGA",
+    "source": "Icons/Windows95/Emus/AMIGA.png"
+  },
+  {
+    "id": "AMIGACD",
+    "source": "Icons/Windows95/Emus/AMIGACD.png"
+  },
+  {
+    "id": "AMIGACDTV",
+    "source": "Icons/Windows95/Emus/AMIGACDTV.png"
+  },
+  {
+    "id": "ARDUBOY",
+    "source": "Icons/Windows95/Emus/ARDUBOY.png"
+  },
+  {
+    "id": "ATARI2600",
+    "source": "Icons/Windows95/Emus/ATARI2600.png"
+  },
+  {
+    "id": "ATARI5200",
+    "source": "Icons/Windows95/Emus/ATARI5200.png"
+  },
+  {
+    "id": "ATARI7800",
+    "source": "Icons/Windows95/Emus/ATARI7800.png"
+  },
+  {
+    "id": "ATARI800",
+    "source": "Icons/Windows95/Emus/ATARI800.png"
+  },
+  {
+    "id": "ATARIST",
+    "source": "Icons/Windows95/Emus/ATARIST.png"
+  },
+  {
+    "id": "ATOMISWAVE",
+    "source": "Icons/Windows95/Emus/ATOMISWAVE.png"
+  },
+  {
+    "id": "C64",
+    "source": "Icons/Windows95/Emus/C64.png"
+  },
+  {
+    "id": "CANNONBALL",
+    "source": "Icons/Windows95/Emus/CANNONBALL.png"
+  },
+  {
+    "id": "CAVESTORY",
+    "source": "Icons/Windows95/Emus/CAVESTORY.png"
+  },
+  {
+    "id": "CHAILOVE",
+    "source": "Icons/Windows95/Emus/CHAILOVE.png"
+  },
+  {
+    "id": "CHANNELF",
+    "source": "Icons/Windows95/Emus/CHANNELF.png"
+  },
+  {
+    "id": "COLECO",
+    "source": "Icons/Windows95/Emus/COLECO.png"
+  },
+  {
+    "id": "COLSGM",
+    "source": "Icons/Windows95/Emus/COLSGM.png"
+  },
+  {
+    "id": "CPC",
+    "source": "Icons/Windows95/Emus/CPC.png"
+  },
+  {
+    "id": "CPET",
+    "source": "Icons/Windows95/Emus/CPET.png"
+  },
+  {
+    "id": "CPLUS4",
+    "source": "Icons/Windows95/Emus/CPLUS4.png"
+  },
+  {
+    "id": "CPS1",
+    "source": "Icons/Windows95/Emus/CPS1.png"
+  },
+  {
+    "id": "CPS2",
+    "source": "Icons/Windows95/Emus/CPS2.png"
+  },
+  {
+    "id": "CPS3",
+    "source": "Icons/Windows95/Emus/CPS3.png"
+  },
+  {
+    "id": "DAPHNE",
+    "source": "Icons/Windows95/Emus/DAPHNE.png"
+  },
+  {
+    "id": "DC",
+    "source": "Icons/Windows95/Emus/DC.png"
+  },
+  {
+    "id": "DINOTHAWR",
+    "source": "Icons/Windows95/Emus/DINOTHAWR.png"
+  },
+  {
+    "id": "DOOM",
+    "source": "Icons/Windows95/Emus/DOOM.png"
+  },
+  {
+    "id": "DOS",
+    "source": "Icons/Windows95/Emus/DOS.png"
+  },
+  {
+    "id": "EASYRPG",
+    "source": "Icons/Windows95/Emus/EASYRPG.png"
+  },
+  {
+    "id": "ENTERPRISE",
+    "source": "Icons/Windows95/Emus/ENTERPRISE.png"
+  },
+  {
+    "id": "FBNEO",
+    "source": "Icons/Windows95/Emus/FBNEO.png"
+  },
+  {
+    "id": "FC",
+    "source": "Icons/Windows95/Emus/FC.png"
+  },
+  {
+    "id": "FDS",
+    "source": "Icons/Windows95/Emus/FDS.png"
+  },
+  {
+    "id": "FLASHBACK",
+    "source": "Icons/Windows95/Emus/FLASHBACK.png"
+  },
+  {
+    "id": "GB",
+    "source": "Icons/Windows95/Emus/GB.png"
+  },
+  {
+    "id": "GBA",
+    "source": "Icons/Windows95/Emus/GBA.png"
+  },
+  {
+    "id": "GBC",
+    "source": "Icons/Windows95/Emus/GBC.png"
+  },
+  {
+    "id": "GG",
+    "source": "Icons/Windows95/Emus/GG.png"
+  },
+  {
+    "id": "GW",
+    "source": "Icons/Windows95/Emus/GW.png"
+  },
+  {
+    "id": "INTELLIVISION",
+    "source": "Icons/Windows95/Emus/INTELLIVISION.png"
+  },
+  {
+    "id": "JAVA",
+    "source": "Icons/Windows95/Emus/JAVA.png"
+  },
+  {
+    "id": "LOWRESNX",
+    "source": "Icons/Windows95/Emus/LOWRESNX.png"
+  },
+  {
+    "id": "LUTRO",
+    "source": "Icons/Windows95/Emus/LUTRO.png"
+  },
+  {
+    "id": "LYNX",
+    "source": "Icons/Windows95/Emus/LYNX.png"
+  },
+  {
+    "id": "MAME",
+    "source": "Icons/Windows95/Emus/MAME.png"
+  },
+  {
+    "id": "MAME2003PLUS",
+    "source": "Icons/Windows95/Emus/MAME2003PLUS.png"
+  },
+  {
+    "id": "MAME2010",
+    "source": "Icons/Windows95/Emus/MAME2010.png"
+  },
+  {
+    "id": "MD",
+    "source": "Icons/Windows95/Emus/MD.png"
+  },
+  {
+    "id": "MDMSU",
+    "source": "Icons/Windows95/Emus/MDMSU.png"
+  },
+  {
+    "id": "MEGADUCK",
+    "source": "Icons/Windows95/Emus/MEGADUCK.png"
+  },
+  {
+    "id": "MS",
+    "source": "Icons/Windows95/Emus/MS.png"
+  },
+  {
+    "id": "MSX",
+    "source": "Icons/Windows95/Emus/MSX.png"
+  },
+  {
+    "id": "MSX2",
+    "source": "Icons/Windows95/Emus/MSX2.png"
+  },
+  {
+    "id": "N64",
+    "source": "Icons/Windows95/Emus/N64.png"
+  },
+  {
+    "id": "N64DD",
+    "source": "Icons/Windows95/Emus/N64DD.png"
+  },
+  {
+    "id": "NAOMI",
+    "source": "Icons/Windows95/Emus/NAOMI.png"
+  },
+  {
+    "id": "NDS",
+    "source": "Icons/Windows95/Emus/NDS.png"
+  },
+  {
+    "id": "NEOCD",
+    "source": "Icons/Windows95/Emus/NEOCD.png"
+  },
+  {
+    "id": "NEOGEO",
+    "source": "Icons/Windows95/Emus/NEOGEO.png"
+  },
+  {
+    "id": "NGC",
+    "source": "Icons/Windows95/Emus/NGC.png"
+  },
+  {
+    "id": "NGP",
+    "source": "Icons/Windows95/Emus/NGP.png"
+  },
+  {
+    "id": "OPENBOR",
+    "source": "Icons/Windows95/Emus/OPENBOR.png"
+  },
+  {
+    "id": "PALMOS",
+    "source": "Icons/Windows95/Emus/PALMOS.png"
+  },
+  {
+    "id": "PANASONIC",
+    "source": "Icons/Windows95/Emus/PANASONIC.png"
+  },
+  {
+    "id": "PC88",
+    "source": "Icons/Windows95/Emus/PC88.png"
+  },
+  {
+    "id": "PC98",
+    "source": "Icons/Windows95/Emus/PC98.png"
+  },
+  {
+    "id": "PCE",
+    "source": "Icons/Windows95/Emus/PCE.png"
+  },
+  {
+    "id": "PCECD",
+    "source": "Icons/Windows95/Emus/PCECD.png"
+  },
+  {
+    "id": "PCFX",
+    "source": "Icons/Windows95/Emus/PCFX.png"
+  },
+  {
+    "id": "PGM",
+    "source": "Icons/Windows95/Emus/PGM.png"
+  },
+  {
+    "id": "PICO",
+    "source": "Icons/Windows95/Emus/PICO.png"
+  },
+  {
+    "id": "POKEMINI",
+    "source": "Icons/Windows95/Emus/POKEMINI.png"
+  },
+  {
+    "id": "PORTS",
+    "source": "Icons/Windows95/Emus/PORTS.png"
+  },
+  {
+    "id": "PS",
+    "source": "Icons/Windows95/Emus/PS.png"
+  },
+  {
+    "id": "PSP",
+    "source": "Icons/Windows95/Emus/PSP.png"
+  },
+  {
+    "id": "PSPMINIS",
+    "source": "Icons/Windows95/Emus/PSPMINIS.png"
+  },
+  {
+    "id": "SATELLAVIEW",
+    "source": "Icons/Windows95/Emus/SATELLAVIEW.png"
+  },
+  {
+    "id": "SATURN",
+    "source": "Icons/Windows95/Emus/SATURN.png"
+  },
+  {
+    "id": "SCUMMVM",
+    "source": "Icons/Windows95/Emus/SCUMMVM.png"
+  },
+  {
+    "id": "SEGA32X",
+    "source": "Icons/Windows95/Emus/SEGA32X.png"
+  },
+  {
+    "id": "SEGACD",
+    "source": "Icons/Windows95/Emus/SEGACD.png"
+  },
+  {
+    "id": "SFC",
+    "source": "Icons/Windows95/Emus/SFC.png"
+  },
+  {
+    "id": "SFCMSU",
+    "source": "Icons/Windows95/Emus/SFCMSU.png"
+  },
+  {
+    "id": "SFX",
+    "source": "Icons/Windows95/Emus/SFX.png"
+  },
+  {
+    "id": "SG1000",
+    "source": "Icons/Windows95/Emus/SG1000.png"
+  },
+  {
+    "id": "SGB",
+    "source": "Icons/Windows95/Emus/SGB.png"
+  },
+  {
+    "id": "SUFAMI",
+    "source": "Icons/Windows95/Emus/SUFAMI.png"
+  },
+  {
+    "id": "SUPERVISION",
+    "source": "Icons/Windows95/Emus/SUPERVISION.png"
+  },
+  {
+    "id": "THOMSON",
+    "source": "Icons/Windows95/Emus/THOMSON.png"
+  },
+  {
+    "id": "TI83",
+    "source": "Icons/Windows95/Emus/TI83.png"
+  },
+  {
+    "id": "TIC",
+    "source": "Icons/Windows95/Emus/TIC.png"
+  },
+  {
+    "id": "TYRQUAKE",
+    "source": "Icons/Windows95/Emus/TYRQUAKE.png"
+  },
+  {
+    "id": "UZEBOX",
+    "source": "Icons/Windows95/Emus/UZEBOX.png"
+  },
+  {
+    "id": "VB",
+    "source": "Icons/Windows95/Emus/VB.png"
+  },
+  {
+    "id": "VECTREX",
+    "source": "Icons/Windows95/Emus/VECTREX.png"
+  },
+  {
+    "id": "VIC20",
+    "source": "Icons/Windows95/Emus/VIC20.png"
+  },
+  {
+    "id": "VIDEOPAC",
+    "source": "Icons/Windows95/Emus/VIDEOPAC.png"
+  },
+  {
+    "id": "VIDEOTON",
+    "source": "Icons/Windows95/Emus/VIDEOTON.png"
+  },
+  {
+    "id": "VMAC",
+    "source": "Icons/Windows95/Emus/VMAC.png"
+  },
+  {
+    "id": "WS",
+    "source": "Icons/Windows95/Emus/WS.png"
+  },
+  {
+    "id": "WSC",
+    "source": "Icons/Windows95/Emus/WSC.png"
+  },
+  {
+    "id": "X1",
+    "source": "Icons/Windows95/Emus/X1.png"
+  },
+  {
+    "id": "X68000",
+    "source": "Icons/Windows95/Emus/X68000.png"
+  },
+  {
+    "id": "XRICK",
+    "source": "Icons/Windows95/Emus/XRICK.png"
+  },
+  {
+    "id": "ZQUEST",
+    "source": "Icons/Windows95/Emus/ZQUEST.png"
+  },
+  {
+    "id": "ZXS",
+    "source": "Icons/Windows95/Emus/ZXS.png"
+  },
+  {
+    "id": "_BootLogo",
+    "source": "Icons/Windows95/Emus/_BootLogo.png"
+  },
+  {
+    "id": "_Scraper",
+    "source": "Icons/Windows95/Emus/_Scraper.png"
+  },
+  {
+    "id": "_SystemTools",
+    "source": "Icons/Windows95/Emus/_SystemTools.png"
+  }
+]
