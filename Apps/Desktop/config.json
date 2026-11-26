@@ -1,0 +1,6 @@
+{
+  "label": "Desktop",
+  "icon": "icon.png",
+  "launch": "launch.sh",
+  "description": "Desktop de desenvolvimento para CrossMix-OS"
+}
