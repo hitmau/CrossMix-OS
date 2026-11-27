@@ -1,5 +1,5 @@
 {
   "label": "Big Picture",
-  "icon": "/mnt/SDCARD/Icons/Default/Emus/PORTS.png",
+  "icon": "/mnt/SDCARD/Apps/BigPicture/big-picture-steam-icon.png",
   "launch": "launch.sh"
 }
