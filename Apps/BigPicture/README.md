@@ -102,3 +102,12 @@ catalogacao e fluxos de video/standby sao conferidos no PC. Inicializacao do
 cartao, acionamento do Fn no firmware, backlight, consumo de bateria e
 emuladores precisam de validacao fisica. O launcher e uma primeira versao
 funcional inspirada na referencia; nao inclui os servicos online da Steam.
+
+### Retorno do standby (atualizacao 0.8.5)
+
+O aplicativo aparece como **Big Picture**. Ao apagar a tela, o player prepara
+um video pausado; ao despertar, a iluminacao volta depois que o mpv informa a
+posicao inicial. Se o player falhar ou nao ficar pronto em cinco segundos, a
+interface reaparece com aviso. Se o video de retorno estiver desativado, a
+interface volta diretamente. O comportamento do player, do framebuffer e da
+iluminacao ainda precisa ser confirmado no TrimUI fisico.

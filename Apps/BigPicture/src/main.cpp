@@ -24,6 +24,8 @@
 #include <signal.h>
 #include <linux/input.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 #include <vector>
 #include "ui_audio.hpp"
 #include "console_art.hpp"
@@ -104,6 +106,10 @@ struct Frontend {
     uint64_t movieRetryAt=0;
     bool movieFromWake=false, pendingMovieRetry=false;
     int wakeMovieRetries=0;
+    bool moviePrepared=false, movieReady=false, wakeWaiting=false;
+    int movieSocket=-1;
+    uint64_t movieQueryAt=0, wakeDeadline=0;
+    string movieSocketPath, movieReply;
     Item detailItem;
     string detailReturnPage;
     int detailReturnSelected=0,detailReturnTab=0;
@@ -593,10 +599,42 @@ struct Frontend {
     void power(const string& action) {
         auto pid=spawn({"/bin/sh",APP+"/power.sh",action});if(pid>0){int status=0;waitpid(pid,&status,0);if(status!=0)std::cerr<<"Backlight command failed: "<<action<<"\n";}
     }
-    void stopMovie() {
-        if(child>0&&childType=="movie") {kill(-child,SIGTERM);int status=0;waitpid(child,&status,0);child=-1;childType.clear();audio.pause(false);SDL_ShowWindow(window);SDL_RaiseWindow(window);SDL_FlushEvents(SDL_FIRSTEVENT,SDL_LASTEVENT);lastInput=ticks();ignoreUntil=ticks()+400;navX=navY=0;discardKeyRepeats=true;dirty=true;trace("video_skipped");}
+    void closeMovieIpc() {
+        if(movieSocket>=0)close(movieSocket);
+        movieSocket=-1;
+        if(!movieSocketPath.empty())unlink(movieSocketPath.c_str());
+        movieSocketPath.clear();movieReply.clear();moviePrepared=false;movieReady=false;
     }
-    void movie(int manual=-1,bool fromWake=false) {
+    void pollPreparedMovie() {
+        if(!moviePrepared||child<=0)return;
+        if(movieSocket<0) {
+            int fd=socket(AF_UNIX,SOCK_STREAM,0);if(fd<0)return;
+            sockaddr_un addr{};addr.sun_family=AF_UNIX;
+            if(movieSocketPath.size()>=sizeof(addr.sun_path)){close(fd);return;}
+            std::copy(movieSocketPath.begin(),movieSocketPath.end(),addr.sun_path);
+            if(connect(fd,reinterpret_cast<sockaddr*>(&addr),sizeof(addr))!=0){close(fd);return;}
+            fcntl(fd,F_SETFL,fcntl(fd,F_GETFL,0)|O_NONBLOCK);movieSocket=fd;
+        }
+        if(!movieReady&&ticks()>=movieQueryAt) {
+            const char query[]="{\"command\":[\"get_property\",\"time-pos\"],\"request_id\":1}\n";
+            send(movieSocket,query,sizeof(query)-1,MSG_NOSIGNAL);movieQueryAt=ticks()+200;
+        }
+        char buf[2048];ssize_t n;while((n=recv(movieSocket,buf,sizeof(buf),0))>0)movieReply.append(buf,n);
+        size_t end;while((end=movieReply.find('\n'))!=string::npos) {
+            string line=movieReply.substr(0,end);movieReply.erase(0,end+1);
+            try {auto reply=J::parse(line);if(reply.value("request_id",0)==1&&reply.value("error",string(""))=="success"&&reply.contains("data")&&reply["data"].is_number())movieReady=true;} catch(...) {}
+        }
+        if(wakeWaiting&&movieReady) {
+            const char resume[]="{\"command\":[\"set_property\",\"pause\",false]}\n";
+            if(send(movieSocket,resume,sizeof(resume)-1,MSG_NOSIGNAL)>0) {
+                wakeWaiting=false;closeMovieIpc();power("on");ignoreUntil=ticks()+500;trace("video_wake_ready");
+            }
+        }
+    }
+    void stopMovie() {
+        if(child>0&&childType=="movie") {kill(-child,SIGTERM);int status=0;waitpid(child,&status,0);child=-1;childType.clear();closeMovieIpc();audio.pause(false);SDL_ShowWindow(window);SDL_RaiseWindow(window);SDL_FlushEvents(SDL_FIRSTEVENT,SDL_LASTEVENT);lastInput=ticks();ignoreUntil=ticks()+400;navX=navY=0;discardKeyRepeats=true;dirty=true;trace("video_skipped");}
+    }
+    void movie(int manual=-1,bool fromWake=false,bool prepare=false) {
         if(movies.empty()) {notify("Adicione vídeos em Data/BigPicture/videos/startup");return;}
         if(child>0)return;
         int choice=manual;
@@ -612,25 +650,33 @@ struct Frontend {
         std::vector<string> args={player,"--no-terminal","--fullscreen","--force-window=yes","--ontop","--keep-open=no","--input-default-bindings=no","--title=Steam Big Picture - Introducao","--input-conf="+APP+"/video-input.conf","--volume="+std::to_string(movieVolume)};
         if(device) {args.push_back("--config-dir="+ROOT+"/Emus/VIDEOS/.config/mpv");args.push_back("--vo=sdl");args.push_back("--ao=sdl");args.push_back("--log-file="+DATA+"/video-player.log");}
         else {args.push_back("--osc=no");args.push_back("--no-config");}
+        if(prepare) {
+            closeMovieIpc();moviePrepared=true;movieSocketPath="/tmp/bigpicture-mpv-"+std::to_string(getpid())+".sock";
+            unlink(movieSocketPath.c_str());args.push_back("--pause=yes");args.push_back("--input-ipc-server="+movieSocketPath);
+        }
         args.push_back(movies[choice].path);child=spawn(args);childType="movie";
         trace("video_start",movies[choice].path);
-        if(child<0){childType.clear();audio.pause(false);SDL_ShowWindow(window);notify("Não foi possível abrir o vídeo.");}
+        if(child<0){childType.clear();closeMovieIpc();audio.pause(false);SDL_ShowWindow(window);notify("Não foi possível abrir o vídeo.");}
     }
     void sleepScreen(bool byFn=false) {
         if(gate.sleeping) {if(byFn)gate.fnOff=true;return;}
         if(childType=="game")return;
+        wakeWaiting=false;pendingMovieRetry=false;
         stopMovie();audio.pause(true);gate.sleeping=true;gate.fnOff=byFn;sleepReason=byFn?"fn":"idle_or_power";dirty=true;draw();power("off");trace("screen_off",sleepReason);
+        movie(-1,true,true);
     }
     void wake(const string& button,bool powerIntro=false) {
         if(!gate.sleeping)return;
         if(button=="fn_on"){gate.fnOff=false;fnOn=true;}
         if(!gate.accepts(button))return;
-        gate.sleeping=false;gate.fnOff=false;power("on");audio.pause(false);lastInput=ticks();ignoreUntil=ticks()+400;dirty=true;trace("wake",button);
+        gate.sleeping=false;gate.fnOff=false;lastInput=ticks();ignoreUntil=ticks()+500;dirty=true;trace("wake",button);
         if(powerIntro||settings.value("intro_on_wake",true)) {
             wakeMovieRetries=0;pendingMovieRetry=false;
-            SDL_Delay(220);draw();SDL_Delay(120);
-            movie(-1,true);
-        }
+            if(moviePrepared&&child>0){wakeWaiting=true;wakeDeadline=ticks()+5000;pollPreparedMovie();return;}
+            movie(-1,true,true);
+            if(moviePrepared&&child>0){wakeWaiting=true;wakeDeadline=ticks()+5000;return;}
+        } else stopMovie();
+        audio.pause(false);draw();power("on");
     }
     void fn(bool on) {
         fnOn=on;if(!settings.value("fn_enabled",true))return;
@@ -661,6 +707,8 @@ struct Frontend {
         string completed=childType;
         bool movieFailed=completed=="movie"&&(!WIFEXITED(status)||WEXITSTATUS(status)!=0);
         bool retryWakeMovie=movieFailed&&movieFromWake&&wakeMovieRetries==0;
+        bool wasPrepared=moviePrepared;
+        closeMovieIpc();
         movieFromWake=false;
         bool crossMixHandoff=completed=="game"&&launched.id=="app:SystemTools"&&WIFEXITED(status)&&WEXITSTATUS(status)==0;
         child=-1;childType.clear();
@@ -678,7 +726,8 @@ struct Frontend {
         bool skipped=completed=="movie"&&WIFEXITED(status)&&WEXITSTATUS(status)==42;
         if(completed=="movie")discardKeyRepeats=true;
         navX=navY=0;trace(skipped?"video_skipped":completed=="movie"?"video_end":"game_end",std::to_string(WIFEXITED(status)?WEXITSTATUS(status):-1));
-        if(retryWakeMovie&&!skipped){wakeMovieRetries=1;pendingMovieRetry=true;movieRetryAt=ticks()+500;trace("video_wake_retry",std::to_string(lastMovie));}
+        if(wakeWaiting){wakeWaiting=false;draw();power("on");notify("O vídeo não pôde ser preparado.");}
+        if(retryWakeMovie&&!skipped&&!wasPrepared){wakeMovieRetries=1;pendingMovieRetry=true;movieRetryAt=ticks()+500;trace("video_wake_retry",std::to_string(lastMovie));}
         else if((!WIFEXITED(status)||WEXITSTATUS(status)!=0)&&!skipped)notify(completed=="movie"?"O vídeo não pôde ser reproduzido.":"O aplicativo encerrou com erro.");
     }
     void pollHardware() {
@@ -688,7 +737,7 @@ struct Frontend {
                 lastInput=ticks();
                 if(e.code==KEY_POWER&&e.value==1) {if(gate.sleeping)wake("power",true);else sleepScreen();}
                 else if(e.code==KEY_VOLUMEUP||e.code==KEY_VOLUMEDOWN) {if(gate.sleeping)wake("any");else adjustMasterVolume(e.code==KEY_VOLUMEUP?1:-1,e.value==2?2:1);}
-                else if(gate.sleeping)wake("any");else if(childType=="movie")stopMovie();
+                else if(gate.sleeping)wake("any");else if(childType=="movie"&&!wakeWaiting&&ticks()>=ignoreUntil)stopMovie();
             }
         }}
         std::ifstream command("/tmp/bigpicture-fn");string value;if(command>>value){command.close();unlink("/tmp/bigpicture-fn");fn(value=="1");}
@@ -774,6 +823,7 @@ struct Frontend {
         lastInput=ticks();
         if(action=="fn"){fn(!fnOn);return;}
         if(gate.sleeping){wake(action=="power"?"power":"any",action=="power");return;}
+        if(wakeWaiting)return;
         if(ticks()<ignoreUntil)return;
         if(action=="power"){sleepScreen();return;}
         if(action=="volume_up"||action=="volume_down"){adjustMasterVolume(action=="volume_up"?1:-1);return;}
@@ -861,6 +911,8 @@ struct Frontend {
         uint64_t lastHardware=0,lastClock=0;
         while(running&&!stopRequested) {
             pollChild();
+            pollPreparedMovie();
+            if(wakeWaiting&&ticks()>=wakeDeadline){wakeWaiting=false;stopMovie();draw();power("on");notify("O vídeo demorou para iniciar.");}
             if(pendingMovieRetry&&ticks()>=movieRetryAt){pendingMovieRetry=false;movie(lastMovie);}
             if(ticks()-lastHardware>150){pollHardware();lastHardware=ticks();}
             refreshStatus();
@@ -878,7 +930,7 @@ struct Frontend {
         }
     }
     ~Frontend() {
-        if(gate.sleeping)power("on");
+        if(gate.sleeping||wakeWaiting)power("on");
         stopMovie();if(child>0){kill(-child,SIGTERM);bool exited=false;for(int i=0;i<50;++i){if(waitpid(child,nullptr,WNOHANG)==child){exited=true;break;}SDL_Delay(20);}if(!exited){kill(-child,SIGKILL);waitpid(child,nullptr,0);}}if(window)persist();
         for(int fd:inputs)close(fd);
         for(auto* joy:joysticks)SDL_JoystickClose(joy);
