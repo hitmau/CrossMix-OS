@@ -1,2 +1,6 @@
 /desktop/desktop-pc
 /desktop/.runtime/
+/desktop/preview-*.bmp
+/desktop/preview-*.png
+__pycache__/
+*.pyc
